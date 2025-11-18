@@ -31,11 +31,18 @@ public class BoardInit {
                 Board board = new Board(rows, cols);
 
                 for (int r = 0; r < rows; r++) {
-                    String line = lines.get(r + 5).replace(" ", "");
+                    String line = lines.get(r + 5).substring(2).replace(" ", "");
                     for (int c = 0; c < cols; c++) {
                         board.getCells()[r][c] = line.charAt(c);
                     }
                 }
+
+                /*for (int r = 0; r < rows; r++) {
+                    String line = lines.get(r + 5).replace(" ", "");
+                    for (int c = 0; c < cols; c++) {
+                        board.getCells()[r][c] = line.charAt(c);
+                    }
+                }*/
 
                 console.print("Mentett játék betöltve.");
                 return board;
