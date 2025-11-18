@@ -28,7 +28,7 @@ public class ConsoleService {
         LOGGER.info(prompt);
         System.out.print(prompt + " ");
         while (!scanner.hasNextInt()) {
-            scanner.next(); // eldobja az érvénytelen inputot
+            scanner.next(); // érvénytelen input eldobása
             System.out.print(prompt + " ");
         }
         int value = scanner.nextInt();
@@ -36,4 +36,3 @@ public class ConsoleService {
         return value;
     }
 }
-

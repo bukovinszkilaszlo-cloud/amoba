@@ -20,19 +20,26 @@ public class BoardInit {
 
     public Board initBoard() {
         int option = console.readInt("1 = fájlból betöltés, 2 = új játék létrehozása");
+
         if (option == 1) {
             try {
                 List<String> lines = Files.readAllLines(Paths.get("amoba_save.txt"));
+
                 int rows = Integer.parseInt(lines.get(2).split(":")[1].trim());
                 int cols = Integer.parseInt(lines.get(3).split(":")[1].trim());
+
                 Board board = new Board(rows, cols);
+
                 for (int r = 0; r < rows; r++) {
                     String line = lines.get(r + 5).replace(" ", "");
-                    for (int c = 0; c < cols; c++)
+                    for (int c = 0; c < cols; c++) {
                         board.getCells()[r][c] = line.charAt(c);
+                    }
                 }
+
                 console.print("Mentett játék betöltve.");
                 return board;
+
             } catch (Exception e) {
                 console.print("Hiba a fájl beolvasásakor, üres 10x10 pálya készül.");
                 return new Board(10, 10);

@@ -11,8 +11,15 @@ public class Game {
         this.ai = ai;
     }
 
-    public Board getBoard() { return board; }
-    public Player getPlayer() { return player; }
-    public Player getAi() { return ai; }
-}
+    public Board getBoard() {
+        return board;
+    }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Player getAi() {
+        return ai;
+    }
+}

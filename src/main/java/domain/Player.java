@@ -9,7 +9,12 @@ public class Player {
         this.symbol = symbol;
     }
 
-    public String getName() { return name; }
-    public char getSymbol() { return symbol; }
+    public String getName() {
+        return name;
+    }
+
+    public char getSymbol() {
+        return symbol;
+    }
 }
 
