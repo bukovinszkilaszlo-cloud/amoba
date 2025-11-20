@@ -1,9 +1,9 @@
 package service;
 
+import java.util.Scanner;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Scanner;
 
 public class ConsoleService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsoleService.class);

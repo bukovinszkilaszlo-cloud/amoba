@@ -1,12 +1,12 @@
+import java.util.Scanner;
+
+import display.BoardDisplayer;
 import domain.Board;
 import domain.Game;
 import domain.Player;
-import display.BoardDisplayer;
 import init.BoardInit;
 import service.ConsoleService;
 import service.GameService;
-
-import java.util.Scanner;
 
 public class AmobaApp {
 

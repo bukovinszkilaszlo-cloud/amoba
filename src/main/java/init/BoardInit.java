@@ -1,11 +1,11 @@
 package init;
 
-import domain.Board;
-import service.ConsoleService;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+
+import domain.Board;
+import service.ConsoleService;
 
 public class BoardInit {
 
@@ -35,7 +35,6 @@ public class BoardInit {
                 Board board = new Board(rows, cols);
 
                 for (int r = 0; r < rows; r++) {
-
                     // Új helyes kód: levágjuk a sor eleji számot
                     String line = lines.get(r + 5).substring(2).replace(" ", "");
 
@@ -54,12 +53,10 @@ public class BoardInit {
                 console.print("Hiba a fájl beolvasásakor, üres 10x10 pálya készül.");
                 return new Board(10, 10);
             }
-        }
-
-        // ─────────────────────────────────────────────
-        // 2) ÚJ JÁTÉK LÉTREHOZÁSA
-        // ─────────────────────────────────────────────
-        else {
+        } else {
+            // ─────────────────────────────────────────────
+            // 2) ÚJ JÁTÉK LÉTREHOZÁSA
+            // ─────────────────────────────────────────────
 
             int rows;
             do {
