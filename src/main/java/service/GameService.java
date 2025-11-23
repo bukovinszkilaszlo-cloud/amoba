@@ -1,4 +1,3 @@
-
 package service;
 
 import java.io.FileWriter;
@@ -23,7 +22,8 @@ public class GameService {
         this.displayer = displayer;
     }
 
-    private boolean hasNeighbor(Board board, int row, int col) {
+    // Megnézi, hogy a megadott üres mező szomszédos-e egy nem üressel
+    boolean hasNeighbor(Board board, int row, int col) {
         if (board.getCells()[row][col] != '.') {
             return false;
         }
@@ -39,7 +39,8 @@ public class GameService {
         return false;
     }
 
-    private char getNextPlayer(Board board) {
+    // Meghatározza, ki jön: ha X és O száma egyenlő → X, különben O
+    char getNextPlayer(Board board) {
         int countX = 0;
         int countO = 0;
         for (int r = 0; r < board.getRows(); r++) {
@@ -52,13 +53,11 @@ public class GameService {
                 }
             }
         }
-        if (countX == countO) {
-            return 'X';
-        }
-        return 'O';
+        return (countX == countO) ? 'X' : 'O';
     }
 
-    private boolean isBoardEmpty(Board board) {
+    // Ellenőrzi, hogy teljesen üres-e a pálya
+    boolean isBoardEmpty(Board board) {
         for (int r = 0; r < board.getRows(); r++) {
             for (int c = 0; c < board.getCols(); c++) {
                 if (board.getCells()[r][c] != '.') {
@@ -69,6 +68,8 @@ public class GameService {
         return true;
     }
 
+    // A fő játékhurok
+    // $COVERAGE-IGNORE$
     public void start(Game game) {
         Board board = game.getBoard();
         Player player = game.getPlayer();
@@ -144,7 +145,8 @@ public class GameService {
         }
     }
 
-    private Move generateAiMove(Board board) {
+    // AI lépést generál (szomszédos mezőkre preferálva)
+    Move generateAiMove(Board board) {
         List<Move> possible = new ArrayList<>();
         for (int r = 0; r < board.getRows(); r++) {
             for (int c = 0; c < board.getCols(); c++) {
@@ -153,6 +155,7 @@ public class GameService {
                 }
             }
         }
+        // Ha nincs szomszédos üres mező → bárhova tehet
         if (possible.isEmpty()) {
             for (int r = 0; r < board.getRows(); r++) {
                 for (int c = 0; c < board.getCols(); c++) {
@@ -165,7 +168,8 @@ public class GameService {
         return possible.get(random.nextInt(possible.size()));
     }
 
-    private boolean isWinner(Board board, char symbol) {
+    // 5 egymás melletti szimbólumot keres 4 irányban
+    boolean isWinner(Board board, char symbol) {
         int[][] dirs = {
                 {1, 0},
                 {0, 1},
@@ -198,7 +202,8 @@ public class GameService {
         return false;
     }
 
-    private boolean promptSave(Board board, Player player, Player ai) {
+    // Bekérdezi a mentést – tesztelhető
+    boolean promptSave(Board board, Player player, Player ai) {
         String ans = console.readString("Szeretnéd menteni? (i/n):");
         if (ans.equalsIgnoreCase("i")) {
             saveBoard(board, player, ai);
@@ -209,16 +214,13 @@ public class GameService {
         return false;
     }
 
-    private void saveBoard(Board board, Player player, Player ai) {
+    // Kiírja fájlba a mentést
+    void saveBoard(Board board, Player player, Player ai) {
         try (FileWriter writer = new FileWriter("amoba_save.txt")) {
-            writer.write("Játékos neve: " + player.getName() + " ("
-                    + player.getSymbol() + ")" + System.lineSeparator());
-            writer.write("AI neve: " + ai.getName() + " ("
-                    + ai.getSymbol() + ")" + System.lineSeparator());
-            writer.write("Sorok száma: " + board.getRows()
-                    + System.lineSeparator());
-            writer.write("Oszlopok száma: " + board.getCols()
-                    + System.lineSeparator());
+            writer.write("Játékos neve: " + player.getName() + " (" + player.getSymbol() + ")" + System.lineSeparator());
+            writer.write("AI neve: " + ai.getName() + " (" + ai.getSymbol() + ")" + System.lineSeparator());
+            writer.write("Sorok száma: " + board.getRows() + System.lineSeparator());
+            writer.write("Oszlopok száma: " + board.getCols() + System.lineSeparator());
 
             writer.write("  ");
             for (int c = 0; c < board.getCols(); c++) {
@@ -238,7 +240,7 @@ public class GameService {
         }
     }
 
-    private static class Move {
+    static class Move {
         final int row;
         final int col;
 

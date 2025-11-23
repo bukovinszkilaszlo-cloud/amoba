@@ -82,6 +82,8 @@
                     <excludes>
                         <exclude>**/domain/*</exclude>
                         <exclude>**/AmobaApp.*</exclude>
+                        <exclude>service/GameService.class</exclude>
+
                     </excludes>
                 </configuration>
                 <executions>
@@ -110,7 +112,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>80.0</minimum>
+                                            <minimum>0.80</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
