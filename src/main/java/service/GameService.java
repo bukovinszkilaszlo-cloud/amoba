@@ -69,7 +69,6 @@ public class GameService {
     }
 
     // A fő játékhurok
-    // $COVERAGE-IGNORE$
     public void start(Game game) {
         Board board = game.getBoard();
         Player player = game.getPlayer();
@@ -96,6 +95,13 @@ public class GameService {
                     console.print("A gép nyert!");
                     return;
                 }
+
+                if (board.isFull()) {
+                    displayer.display(board);
+                    console.print("Döntetlen! A tábla megtelt.");
+                    return;
+                }
+
                 continue;
             }
 
@@ -140,6 +146,12 @@ public class GameService {
             if (isWinner(board, player.getSymbol())) {
                 displayer.display(board);
                 console.print("Nyertél!");
+                return;
+            }
+
+            if (board.isFull()) {
+                displayer.display(board);
+                console.print("Döntetlen! A tábla megtelt.");
                 return;
             }
         }

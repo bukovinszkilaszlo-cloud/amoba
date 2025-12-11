@@ -32,4 +32,15 @@ public class Board {
     public char[][] getCells() {
         return cells;
     }
+
+    public boolean isFull() {
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (cells[r][c] == '.') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
