@@ -1,11 +1,8 @@
-Játékos neve: Laci (X)
-AI neve: Gép (O)
-Sorok száma: 6
-Oszlopok száma: 6
-  A B C D E F 
-1 . . . O . . 
-2 . . . O . . 
-3 X X X X . . 
-4 . X X X O . 
-5 . O O . . . 
-6 . . O O . . 
+Játékos neve: P (X)
+AI neve: AI (O)
+Sorok száma: 3
+Oszlopok száma: 3
+  A B C 
+1 . . . 
+2 . . . 
+3 . . . 

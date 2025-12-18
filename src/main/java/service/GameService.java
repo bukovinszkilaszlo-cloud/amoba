@@ -15,11 +15,13 @@ public class GameService {
 
     private final ConsoleService console;
     private final BoardDisplayer displayer;
+    private final BoardService boardService;
     private final Random random = new Random();
 
-    public GameService(ConsoleService console, BoardDisplayer displayer) {
+    public GameService(ConsoleService console, BoardDisplayer displayer, BoardService boardService) {
         this.console = console;
         this.displayer = displayer;
+        this.boardService = boardService;
     }
 
     // Megnézi, hogy a megadott üres mező szomszédos-e egy nem üressel
@@ -32,7 +34,7 @@ public class GameService {
         for (int i = 0; i < dr.length; i++) {
             int rr = row + dr[i];
             int cc = col + dc[i];
-            if (board.isInside(rr, cc) && board.getCells()[rr][cc] != '.') {
+            if (boardService.isInside(board, rr, cc) && board.getCells()[rr][cc] != '.') {
                 return true;
             }
         }
@@ -96,7 +98,7 @@ public class GameService {
                     return;
                 }
 
-                if (board.isFull()) {
+                if (boardService.isFull(board)) {
                     displayer.display(board);
                     console.print("Döntetlen! A tábla megtelt.");
                     return;
@@ -132,7 +134,7 @@ public class GameService {
                 continue;
             }
 
-            if (!board.isInside(r, c) || board.getCells()[r][c] != '.') {
+            if (!boardService.isInside(board, r, c) || board.getCells()[r][c] != '.') {
                 console.print("Érvénytelen lépés!");
                 continue;
             }
@@ -149,7 +151,7 @@ public class GameService {
                 return;
             }
 
-            if (board.isFull()) {
+            if (boardService.isFull(board)) {
                 displayer.display(board);
                 console.print("Döntetlen! A tábla megtelt.");
                 return;
@@ -198,7 +200,7 @@ public class GameService {
                     for (int k = 0; k < 5; k++) {
                         int rr = r + d[0] * k;
                         int cc = c + d[1] * k;
-                        if (!board.isInside(rr, cc)) {
+                        if (!boardService.isInside(board, rr, cc)) {
                             break;
                         }
                         if (board.getCells()[rr][cc] == symbol) {

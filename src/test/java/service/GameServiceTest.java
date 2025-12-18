@@ -17,7 +17,7 @@ class GameServiceTest {
     @Test
     void testIsBoardEmpty_EmptyBoard() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(3, 3);
 
         // WHEN
@@ -30,7 +30,7 @@ class GameServiceTest {
     @Test
     void testIsBoardEmpty_NotEmpty() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(3, 3);
         board.getCells()[1][1] = 'X';
 
@@ -44,7 +44,7 @@ class GameServiceTest {
     @Test
     void testHasNeighbor_NoNeighbors() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(3, 3);   // minden '.'
 
         // WHEN
@@ -57,7 +57,7 @@ class GameServiceTest {
     @Test
     void testHasNeighbor_HasAdjacent() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(3, 3);
         board.getCells()[0][0] = 'X'; // szomszéd
 
@@ -71,7 +71,7 @@ class GameServiceTest {
     @Test
     void testHasNeighbor_CellNotEmpty_ReturnsFalse() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(3, 3);
         board.getCells()[1][1] = 'X'; // nem üres
 
@@ -85,7 +85,7 @@ class GameServiceTest {
     @Test
     void testGetNextPlayer_EmptyBoard_ReturnsX() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(3, 3);
 
         // WHEN
@@ -98,7 +98,7 @@ class GameServiceTest {
     @Test
     void testGetNextPlayer_EqualCount_ReturnsX() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(3, 3);
 
         board.getCells()[0][0] = 'X';
@@ -114,7 +114,7 @@ class GameServiceTest {
     @Test
     void testGetNextPlayer_MoreX_ReturnsO() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(3, 3);
 
         board.getCells()[0][0] = 'X';
@@ -131,7 +131,7 @@ class GameServiceTest {
     @Test
     void testIsWinner_FiveInRow() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(5, 5);
 
         for (int i = 0; i < 5; i++) {
@@ -148,7 +148,7 @@ class GameServiceTest {
     @Test
     void testIsWinner_NoFiveInRow() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(5, 5);
 
         board.getCells()[2][0] = 'X';
@@ -167,21 +167,22 @@ class GameServiceTest {
     @Test
     void testGenerateAiMove_EmptyBoard_ReturnsAnyEmptyCell() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(3, 3); // mind '.' → bárhová léphet
+        BoardService boardService = new BoardService();
 
         // WHEN
         GameService.Move move = gs.generateAiMove(board);
 
         // THEN
-        assertTrue(board.isInside(move.row, move.col));
+        assertTrue(boardService.isInside(board, move.row, move.col));
         assertEquals('.', board.getCells()[move.row][move.col]);
     }
 
     @Test
     void testGenerateAiMove_PrefersNeighborCells() {
         // GIVEN
-        GameService gs = new GameService(null, null);
+        GameService gs = new GameService(null, null, new BoardService());
         Board board = new Board(3, 3);
 
         board.getCells()[1][1] = 'X'; // ez mellé fog lépni
@@ -202,7 +203,7 @@ class GameServiceTest {
     void testPromptSaveYes() {
         // GIVEN
         ConsoleService console = mock(ConsoleService.class);
-        GameService gs = new GameService(console, null);
+        GameService gs = new GameService(console, null, new BoardService());
 
         Board board = new Board(3, 3);
         Player player = new Player("P", 'X');
@@ -221,7 +222,7 @@ class GameServiceTest {
     void testPromptSaveNo() {
         // GIVEN
         ConsoleService console = mock(ConsoleService.class);
-        GameService gs = new GameService(console, null);
+        GameService gs = new GameService(console, null, new BoardService());
 
         Board board = new Board(3, 3);
         Player player = new Player("P", 'X');

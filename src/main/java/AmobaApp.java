@@ -5,6 +5,7 @@ import domain.Board;
 import domain.Game;
 import domain.Player;
 import init.BoardInit;
+import service.BoardService;
 import service.ConsoleService;
 import service.GameService;
 
@@ -25,7 +26,8 @@ public class AmobaApp {
         Board board = boardInit.initBoard();
 
         BoardDisplayer displayer = new BoardDisplayer(console);
-        GameService gameService = new GameService(console, displayer);
+        BoardService boardService = new BoardService();
+        GameService gameService = new GameService(console, displayer, boardService);
 
         Game game = new Game(board, player, ai);
 

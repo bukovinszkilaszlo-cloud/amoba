@@ -17,9 +17,10 @@ public class Board {
         }
     }
 
+    /*Törölhető
     public boolean isInside(int r, int c) {
         return r >= 0 && r < rows && c >= 0 && c < cols;
-    }
+    }*/
 
     public int getRows() {
         return rows;
@@ -33,6 +34,7 @@ public class Board {
         return cells;
     }
 
+    /*Törölhető
     public boolean isFull() {
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
@@ -42,5 +44,5 @@ public class Board {
             }
         }
         return true;
-    }
+    }*/
 }
