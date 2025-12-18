@@ -1,10 +1,8 @@
 
 package service;
 
-import display.BoardDisplayer;
 import domain.Board;
 import domain.Player;
-import domain.Game;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
